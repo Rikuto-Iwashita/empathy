@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムライン</title>
+</head>
+<body>
+    <h1>タイムライン</h1>
+    
+    <ul>
+        <li th:each="post : ${posts}">
+            <div>
+                <p th:text="${post.content}">投稿内容</p>
+                <a th:href="@{'/empathy/' + ${post.id} + '/update'}">編集</a>
+                <form th:action="@{'/empathy/' + ${post.id} + '/delete'}" method="post" style="display: inline;">
+                    <button type="submit">削除</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+    
+    <!-- 投稿がない場合のメッセージ -->
+    <p th:if="${#lists.isEmpty(posts)}">投稿はありません。</p>
+    
+    <a href="/empathy/create">投稿作成</a>
+</body>
+</html>

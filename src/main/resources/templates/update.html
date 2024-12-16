@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿編集</title>
+</head>
+<body>
+    <h1>投稿編集</h1>
+    <form th:action="@{/empathy/{id}/update(id=${post.id})}" method="post" th:object="${post}">
+        <textarea th:field="*{content}"></textarea>
+        <button type="submit">更新</button>
+    </form>
+    <a th:href="@{/empathy/home}">キャンセル</a>
+</body>
+</html>
