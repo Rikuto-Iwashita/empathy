@@ -1,0 +1,75 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f8faff;
+    color: #4a4a4a;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    color: #4b6584;
+    margin-top: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: #6c5ce7;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #dfe6e9;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover{
+    background-color: #a29bfe;
+    color: white;
+}
+
+button{
+    background-color: #74b9ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover{
+    background-color: #0984e3;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    background-color: #ffffff;
+    border: 1px solid #dfe6e9;
+    border-radius: 10px;
+    margin: 10px auto;
+    padding: 15px;
+    max-width: 500px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p{
+    margin: 10px 0;
+    font-size: 16px;   
+}
+
+div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a[href="/empathy/create"] {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 150px;
+}

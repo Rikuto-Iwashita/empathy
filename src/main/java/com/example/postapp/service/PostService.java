@@ -56,4 +56,28 @@ public class PostService {
 		}
 		return false;//IDが見つからない場合
 	}
+	
+	//投稿にいいねを追加
+	public boolean addLike(Long id) {
+		Optional<Post> postOptional =postRepository.findById(id);
+		if(postOptional.isPresent()) {
+			Post post = postOptional.get();
+			post.setLikeCount(post.getLikeCount() + 1);//いいね数を増やす
+			postRepository.save(post);
+			return true;
+		}
+		return false;
+	}
+	
+	//投稿に頑張ってを追加
+	public boolean addCheer(Long id) {
+		Optional<Post> postOptional = postRepository.findById(id);
+		if(postOptional.isPresent()) {
+			Post post = postOptional.get();
+			post.setCheerCount(post.getCheerCount() + 1);//頑張ってを増やす。
+			postRepository.save(post);
+			return true;
+		}
+		return false;
+	}
 }

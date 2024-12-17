@@ -17,6 +17,10 @@ public class Post {
 	private String content;
 	
 	private LocalDateTime createdAt;
+	
+	private int likeCount;
+	
+	private int cheerCount;
 
 	public Long getId() {
 		return id;
@@ -42,6 +46,22 @@ public class Post {
 		this.createdAt = createdAt;
 	}
 	
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public int getCheerCount() {
+		return cheerCount;
+	}
+
+	public void setCheerCount(int cheerCount) {
+		this.cheerCount = cheerCount;
+	}
+
 	@Override
 	public String toString() {
 		return content;

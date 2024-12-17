@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>タイムライン</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>タイムライン</h1>
+    <a href="#">ログイン</a>
+    <a href="#">ログアウト</a>
     
     <ul>
         <li th:each="post : ${posts}">
             <div>
                 <p th:text="${post.content}">投稿内容</p>
+                <form th:action="@{'/empathy/' + ${post.id} + '/like'}" method="post">
+                    <button type="submit">💗(<span th:text="${post.likeCount}">0</span>)</button>
+                </form>
+                <form th:action="@{'/empathy/' + ${post.id} + '/cheer'}" method="post">
+                    <button type="submit">🔥(<span th:text="${post.cheerCount}">0</span>)</button>
+                </form>
                 <a th:href="@{'/empathy/' + ${post.id} + '/update'}">編集</a>
                 <form th:action="@{'/empathy/' + ${post.id} + '/delete'}" method="post" style="display: inline;">
                     <button type="submit">削除</button>

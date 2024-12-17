@@ -77,4 +77,18 @@ public class PostController {
     	postService.deletePost(id);
     	return "redirect:/empathy/home";// 削除後タイムラインにリダイレクト
     }
+    
+    //いいねを追加
+    @PostMapping("/{id}/like")
+    public String addLike(@PathVariable Long id) {
+    	postService.addLike(id);
+    	return "redirect:/empathy/home";
+    }
+    
+    //頑張ってを追加
+    @PostMapping("/{id}/cheer")
+    public String addCheer(@PathVariable Long id) {
+    	postService.addCheer(id);
+    	return "redirect:/empathy/home";
+    }
 }
