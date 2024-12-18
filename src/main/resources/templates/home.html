@@ -8,9 +8,12 @@
 </head>
 <body>
     <h1>タイムライン</h1>
+    <a href="/logout">ログアウト</a>
+
     <ul>
         <li th:each="post : ${posts}">
             <div>
+                <p th:text="${post.user.username} + ':' "><!--投稿者を表示--></p>
                 <p th:text="${post.content}">投稿内容</p>
                 <form th:action="@{'/empathy/' + ${post.id} + '/like'}" method="post">
                     <button type="submit">💗(<span th:text="${post.likeCount}">0</span>)</button>

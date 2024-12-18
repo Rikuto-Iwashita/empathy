@@ -3,6 +3,7 @@ package com.example.postapp.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.postapp.model.Post;
+import com.example.postapp.model.User;
 import com.example.postapp.service.PostService;
 
 @Controller
@@ -33,11 +36,8 @@ public class PostController {
     
     //Create: 投稿作成
     @PostMapping("/create")
-    public String createPost(@ModelAttribute Post post, BindingResult result) {
-    	if (result.hasErrors()) {
-    		return "create";
-    	}
-    	postService.createPost(post.getContent());
+    public String createPost(@RequestParam String content, @AuthenticationPrincipal User user) {
+    	postService.createPost(content, user);
     	return "redirect:/empathy/home";//投稿後にタイムライン（ホームへリダイレクト）
     }
     

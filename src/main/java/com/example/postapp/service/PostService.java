@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.postapp.model.Post;
+import com.example.postapp.model.User;
 import com.example.postapp.repository.PostRepository;
 
 @Service
@@ -23,10 +24,11 @@ public class PostService {
 	}
 	
 	//新規投稿を作成
-	public void createPost(String content) {
+	public void createPost(String content, User user) {
 		Post post = new Post();
 		post.setContent(content);
 		post.setCreatedAt(LocalDateTime.now());
+		post.setUser(user);
 		postRepository.save(post); //リポジトリに保存
 	}
 	
