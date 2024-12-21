@@ -45,6 +45,7 @@ public class PostController {
     @GetMapping("/home")
     public String showTimeline(Model model) {
     	List<Post> posts = postService.getAllPosts();
+    	//sysoutはコンソール上での確認。完成したら消す
     	System.out.println("posts" + posts);
         model.addAttribute("posts", posts);
         return "home";  // home.htmlに対応
