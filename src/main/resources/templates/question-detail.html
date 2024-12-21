@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>質問詳細</title>
+</head>
+<body>
+    <h1>質問詳細</h1>
+    <p><strong>タイトル:</strong> <span th:text="${question.title}"></span></p>
+    <p><strong>内容:</strong> <span th:text="${question.content}"></span></p>
+    <p><strong>投稿者:</strong> <span th:text="${question.user.username}"></span></p>
+    <p><strong>投稿日:</strong> <span th:text="${#temporals.format(question.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    <br>
+
+    <h2>返信</h2>
+    <div th:if="${#lists.size(replies) > 0}">
+        <ul>
+            <li th:each="reply : ${replies}">
+                <p th:text="${reply.content}"></p>
+                <p><small th:text="${#temporals.format(reply.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></small></p>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${#lists.size(replies) == 0}">
+        <p>まだ返信はありません</p>
+    </div>
+
+    <h3>返信機能をつける予定</h3>
+
+    <a href="/empathy/questions">質問一覧に戻る</a>
+</body>
+</html>
