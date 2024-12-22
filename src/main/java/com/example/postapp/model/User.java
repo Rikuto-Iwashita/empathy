@@ -1,5 +1,7 @@
 package com.example.postapp.model;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -25,6 +27,13 @@ public class User implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.emptyList();
+	}
+	
+	public int getAge() {
+		LocalDate birthDate = LocalDate.parse(this.dateOfBirth);//生年月日をLocalDateに変換
+		LocalDate currentDate = LocalDate.now();
+		Period period = Period.between(birthDate, currentDate);//年齢を計算
+		return period.getYears();
 	}
 	
 	public Long getId() {
