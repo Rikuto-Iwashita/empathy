@@ -67,9 +67,7 @@ div{
     align-items: center;
 }
 
-a[href="/empathy/create"] {
-    display: block;
-    text-align: center;
-    margin: 20px auto;
-    max-width: 150px;
+.highlight {
+    color: rgb(138, 184, 13);
+    font-weight: bold;
 }
