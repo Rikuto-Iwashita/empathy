@@ -57,10 +57,7 @@ public class PostController {
     	
     	//世代別の登録数を表示
     	Map<String, Long> ageGroupCounts = userService.getAgeGroupCounts();
-    	
-    	System.out.println(ageGroupCounts);
 
-    	
     	//投稿をモデルに追加
     	model.addAttribute("ageGroupCounts", ageGroupCounts);   	
     	model.addAttribute("posts", posts);

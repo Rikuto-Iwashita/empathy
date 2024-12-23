@@ -12,14 +12,11 @@
     <div th:if="${#lists.size(questions) > 0}">
         <ul>
             <li th:each="question : ${questions}">
-                <p>
-                    <strong>タイトル:</strong><span th:text="${question.title}"></span><br>
-                    <strong>投稿者:</strong><span th:text="${question.user.username}"></span><br>
-                    <strong>内容:</strong><span th:text="${question.content}"></span><br>
-                    <strong>投稿日:</strong><span th:text="${#temporals.format(question.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span><br>
-                    <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細を見る</a>
-                    <a th:href="@{/empathy/questions/{id}/reply(id=${question.id})}">返信する</a>
-                </p>
+                <h3 th:text="${question.title}"></h3>
+                <p th:text="${question.content}"></p>
+                <p th:text="'対象世代:' + ${question.ageGroup}"></p>
+                <p th:text="${#temporals.format(question.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細を見る</a>
             </li>
         </ul>
     </div>

@@ -40,6 +40,7 @@ public class UserService implements UserDetailsService{
                 .orElseThrow(() -> new UsernameNotFoundException("ユーザー名が見つかりません: " + username));
     }
     
+    //年齢を取得
     public int getUserAge(User user) {
     	//LocalDate型に変換
     	LocalDate birthDate = convertToDate(user.getDateOfBirth());
@@ -54,7 +55,7 @@ public class UserService implements UserDetailsService{
     }
 
     //ユーザーの年齢グループを返す
-    private String getAgeGroup(User user) {
+    public String getAgeGroup(User user) {
     	int age = calculateAge(convertToDate(user.getDateOfBirth()));
     	
     	if(age >= 13 && age <= 18) {return "13-18歳";}
@@ -65,7 +66,7 @@ public class UserService implements UserDetailsService{
     }
     
     //年齢を計算
-    private int calculateAge(LocalDate birthDate) {
+    public int calculateAge(LocalDate birthDate) {
     	if(birthDate == null) {
     		return 0;//nullの場合は0を返す。
     	}
@@ -73,12 +74,21 @@ public class UserService implements UserDetailsService{
     }
     
     //文字列をLocalDateに変換
-    private LocalDate convertToDate(String dateOfBirth) {
+    public LocalDate convertToDate(String dateOfBirth) {
     	try {
 			return LocalDate.parse(dateOfBirth);
 		} catch (Exception e) {
 			return null;//無効な場合はnull
 		}
+    }
+    
+    //直接年齢から世代を取得するためのメソッド。getAgeGroupと同じようなもの
+    public String getAgeGroupFormAge(int age) {
+        if (age >= 13 && age <= 18) return "13-18歳";
+        if (age >= 19 && age <= 24) return "19-24歳";
+        if (age >= 25 && age <= 29) return "25-29歳";
+        if (age >= 30 && age <= 39) return "30-39歳";
+        return "40歳以上";
     }
     
 }

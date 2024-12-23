@@ -19,10 +19,11 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private String ageGroup;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -68,6 +69,14 @@ public class Question {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public String getAgeGroup() {
+		return ageGroup;
+	}
+
+	public void setAgeGroup(String ageGroup) {
+		this.ageGroup = ageGroup;
 	}
 
 	public User getUser() {
