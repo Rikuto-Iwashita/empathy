@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>質問一覧</title>
+</head>
+<body>
+    <h1>質問一覧</h1>
+
+    <div th:if="${#lists.size(questions) > 0}">
+        <ul>
+            <li th:each="question : ${questions}">
+                <h3 th:text="${question.title}"></h3>
+                <p th:text="${question.content}"></p>
+                <p th:text="'対象世代:' + ${question.ageGroup}"></p>
+                <p th:text="${#temporals.format(question.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細を見る</a>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${#lists.size(questions) == 0}">
+        <p>質問はまだありません</p>
+    </div>
+
+    <a href="/empathy/questions/create">質問する</a>
+    <a href="/empathy/home">ホームへ戻る</a>
+</body>
+</html>

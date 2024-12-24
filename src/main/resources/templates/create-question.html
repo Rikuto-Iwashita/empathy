@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>質問投稿</title>
+</head>
+<body>
+    <h1>新しい質問を投稿</h1>
+    <form action="/empathy/questions/create" method="post">
+        <input type="text" name="title" placeholder="タイトルを入力してください" required>
+        <textarea name="content" placeholder="質問内容を入力してください" required></textarea>
+        <select name="ageGroup" required>
+            <option value="13-18歳">13-18歳</option>
+            <option value="19-24歳">19-24歳</option>
+            <option value="25-29歳">25-29歳</option>
+            <option value="30-39歳">30-39歳</option>
+            <option value="40歳以上">40歳以上</option>
+        </select>
+        <button type="submit">質問を投稿する</button>
+    </form>
+
+    <a href="/empathy/questions">戻る</a>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>質問詳細</title>
+</head>
+<body>
+    <h1>質問詳細</h1>
+    <div>
+        <h1 th:text="${question.title}"></h1>
+        <p th:text="${question.content}"></p>
+    </div>
+    
+    <h2>Replies</h2>
+    <ul>
+        <li th:each="reply : ${formattedReplies}">
+            <strong th:text="${reply['user']}">Username</strong>: 
+            <span th:text="${reply['content']}">Content</span>
+        </li>
+    </ul>
+    
+    
+    
+
+    <h3>返信一覧</h3>
+    <div>
+        <ul>
+            <li th:each="reply : ${replies}">
+                <p th:text="${reply.user.username} + ': ' + &{reply.content}"></p>
+                <p th:text="'投稿日時: ' + ${reply.createdAt}"></p>
+            </li>
+        </ul>
+    </div>
+
+    <h3>返信する</h3>
+    <form th:action="@{/empathy/questions/{id}/reply(id=${question.id})}" method="post">
+        <textarea name="content" placeholder="返信内容を入力してください"></textarea>
+        <button type="submit">返信を投稿</button>
+    </form>    
+
+    <a href="/empathy/questions">質問一覧に戻る</a>
+</body>
+</html>

@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>ログイン</title>
 </head>
 <body>
     <h1>ログイン</h1>
     <form action="/login" method="post">
-        <label for="username">ユーザー名:</label>
+        <label for="username">ユーザーネーム:</label>
         <input type="text" id="username" name="username" required>
         <br>
-        <label for="password">パスワード:</label>
+        <label for="password">パスワード</label>
         <input type="password" id="password" name="password" required>
-        <br>
-        <label for="dateOfBirth">生年月日:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
         <br>
         <button type="submit">ログイン</button>
     </form>
-    <p>アカウントをお持ちでない場合は <a href="/signup">新規登録</a></p>
-</body>
+    <a href="/signup">アカウントをお持ちでない方は新規作成</a>
 </html>
