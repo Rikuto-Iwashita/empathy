@@ -7,13 +7,12 @@ import java.util.Optional;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.postapp.model.Post;
 import com.example.postapp.model.User;
@@ -81,19 +80,33 @@ public class PostController {
     
     //Update : 投稿を更新
     @PostMapping("/{id}/update")
-    public String updatePost(@PathVariable Long id, @ModelAttribute Post post, BindingResult result) {
-        if (result.hasErrors()) {
-            return "update";
-        }
-        postService.updatePost(id, post.getContent());
-        return "redirect:/empathy/home"; // 更新後タイムラインへリダイレクト
+    public String updatePost(
+    		@PathVariable Long id,
+    		@RequestParam String content,
+    		@AuthenticationPrincipal User loggedInUser,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+			postService.updatePost(id, content, loggedInUser);
+			redirectAttributes.addFlashAttribute("message", "投稿を更新しました");
+		} catch (IllegalAccessException e) {
+			redirectAttributes.addFlashAttribute("error", e.getMessage());
+		}
+    	return "redirect:/empathy/home";
     }
     
     //Delete: 投稿削除確認ダイアログの表示（モーダルにするつもり）
     @PostMapping("/{id}/delete")
-    public String deletePost(@PathVariable Long id) {
-    	postService.deletePost(id);
-    	return "redirect:/empathy/home";// 削除後タイムラインにリダイレクト
+    public String deletePost(
+    		@PathVariable Long id,
+    		@AuthenticationPrincipal User loggUser,
+    		RedirectAttributes redirectAttributes) {
+    	try {
+			postService.deletePost(id, loggUser);
+			redirectAttributes.addFlashAttribute("message", "投稿を削除しました");
+			} catch (IllegalAccessException e) {
+				redirectAttributes.addFlashAttribute("error", e.getMessage());
+		}
+    	return "redirect:/empathy/home";
     }
     
     //いいねを追加

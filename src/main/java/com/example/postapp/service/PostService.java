@@ -40,26 +40,30 @@ public class PostService {
 		return postRepository.findById(id);//IDをキーに検索
 	}
 	
-	//投稿を更新
-	public boolean updatePost(Long id, String content) {
-		Optional<Post> existingPost = postRepository.findById(id);
-		if(existingPost.isPresent()) {//投稿が存在（IDが見つかる場合）以下を実行
-			Post post = existingPost.get();
-			post.setContent(content);//コンテンツ更新
-			post.setCreatedAt(LocalDateTime.now());//日時も更新
-			postRepository.save(post);//更新内容を保存
-			return true;
+	//投稿を取得し、編集、削除権限を確認
+	public Post getPostForEditOrDelete(Long id, User loggedInUser) throws IllegalAccessException{
+		Post post = postRepository.findById(id)
+				.orElseThrow(() -> new IllegalAccessException("投稿が見つかりません"));
+		
+		//投稿したユーザーとログインユーザーを比較
+		if(!post.getUser().getId().equals(loggedInUser.getId()) ) {
+			throw new IllegalAccessException("この投稿を編集または削除する権限がありません");
 		}
-		return false;//IDが見つからない場合
+		
+		return post;
 	}
 	
 	//投稿を削除
-	public boolean deletePost(Long id) {
-		if(postRepository.existsById(id)) {//IDが存在するか確認
-			postRepository.deleteById(id);//存在するならば削除する。
-			return true;
-		}
-		return false;//IDが見つからない場合
+	public void deletePost(Long id, User loggedInUser) throws IllegalAccessException{
+		Post post = getPostForEditOrDelete(id, loggedInUser);
+		postRepository.delete(post);
+	}
+	
+	//投稿を更新
+	public void updatePost(Long id, String content, User loggedInUser) throws IllegalAccessException{
+		Post post = getPostForEditOrDelete(id, loggedInUser);
+		post.setContent(content);
+		postRepository.save(post);
 	}
 	
 	//投稿にいいねを追加

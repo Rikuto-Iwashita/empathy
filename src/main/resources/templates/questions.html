@@ -8,15 +8,24 @@
 </head>
 <body>
     <h1>質問一覧</h1>
-
-    <div th:if="${#lists.size(questions) > 0}">
+    <div>
+        <a href="/empathy/questions?filter=sameGeneration">同世代の質問（その世代からその世代向け）</a>
+        <a href="/empathy/questions?filter=toMyGeneration">自分の世代向けの質問</a>
+        <a href="/empathy/questions">全ての質問</a>
+    </div>
+    <div>
+        <!-- 質問一覧を表示 -->
         <ul>
             <li th:each="question : ${questions}">
-                <h3 th:text="${question.title}"></h3>
+                <h2 th:text="${question.title}"></h2>
                 <p th:text="${question.content}"></p>
-                <p th:text="'対象世代:' + ${question.ageGroup}"></p>
-                <p th:text="${#temporals.format(question.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></p>
-                <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細を見る</a>
+                <!-- 質問した世代を表示 -->
+                <p>質問した世代: 
+                    <span th:text="${questionCreatedByAgeGroups[question.id]}"></span>
+                </p>
+                <!-- 質問対象世代を表示 -->
+                <p>回答する世代: <span th:text="${question.ageGroup}"></span></p>
+                <p th:text="${question.createdAt}"></p>
             </li>
         </ul>
     </div>

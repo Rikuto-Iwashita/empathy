@@ -21,6 +21,11 @@ public class QuestionService {
         this.userService = userService;
     }
     
+    //全ての質問を取得
+    public List<Question> getAllQuestions() {
+    	return questionRepository.findAll();
+    }
+    
     /* ログインユーザーの同世代の質問と、
      * 他世代から自分の世代向けに送られた質問を取得する。*/
     public List<Question> getFilteredQuestions(User user) {
@@ -45,6 +50,57 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
+    //特定の世代向けの質問を取得
+    public List<Question> getQuestionsByTargetAgeGroup(String ageGroup) {
+    	return questionRepository.findAll().stream()
+    			.filter(question -> ageGroup.equals(question.getAgeGroup()))
+    			.collect(Collectors.toList());
+    }
+    
+    //自分の世代に向けられた質問を取得
+    public List<Question> getQuestionsToSpecificAgeGroup(User user) {
+    	//ユーザーと世代を取得
+    	int userAge = userService.getUserAge(user);
+    	String userAgeGroup = userService.getAgeGroupFormAge(userAge);
+    	
+    	//質問をフィルタリング
+    	return questionRepository.findAll().stream()
+    			.filter(question -> {
+    				//質問の対象世代と質問者の世代を取得
+    				String questionAgeGroup = question.getAgeGroup();
+    				String questionerAgeGroup = userService.getAgeGroup(question.getUser());
+    				
+    				//質問者の世代が異なるかつ質問の対象世代がログインユーザーの世代と一致する
+    				boolean isFromOtherGeneration = !userAgeGroup.equals(questionerAgeGroup);//質問者の世代が違う
+    				boolean isToUserGeneration = userAgeGroup.equals(questionAgeGroup);//質問がログインユーザーの世代向け
+    				
+    				//他の世代から自分の世代への質問のみを表示
+    				return isFromOtherGeneration && isToUserGeneration;
+    			})
+    			.collect(Collectors.toList());
+    }
+    
+    //ログインしているユーザーから、その世代へ向けた質問のみ取得
+    public List<Question> getQuestionsFromAndToSameGeneration(User user) {
+        // ユーザーの年齢と世代を取得
+        int userAge = userService.getUserAge(user);
+        String userAgeGroup = userService.getAgeGroupFormAge(userAge);
+
+        // 質問をフィルタリング
+        return questionRepository.findAll().stream()
+                .filter(question -> {
+                    User questioner = question.getUser();
+                    if (questioner == null) {
+                        return false; // 質問者が不明な場合はスキップ
+                    }
+                    String questionerAgeGroup = userService.getAgeGroup(questioner);
+                    String targetAgeGroup = question.getAgeGroup();
+
+                    // 質問者の世代と、質問の対象世代が両方ともログインユーザーの世代と一致する場合のみ表示
+                    return userAgeGroup.equals(questionerAgeGroup) && userAgeGroup.equals(targetAgeGroup);
+                })
+                .collect(Collectors.toList());
+    }
     
     /**
      * 新しい質問を作成する

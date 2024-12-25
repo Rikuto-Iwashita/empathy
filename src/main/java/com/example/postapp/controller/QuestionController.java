@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.postapp.model.Question;
 import com.example.postapp.model.User;
+import com.example.postapp.service.PostService;
 import com.example.postapp.service.QuestionService;
 import com.example.postapp.service.UserService;
 
@@ -26,18 +27,56 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserService userService;
+    private final PostService postService;
 
-    public QuestionController(QuestionService questionService, UserService userService) {
-        this.questionService = questionService;
-        this.userService = userService;
-    }
-	
+    public QuestionController(QuestionService questionService, UserService userService, PostService postService) {
+		this.questionService = questionService;
+		this.userService = userService;
+		this.postService = postService;
+	}
+
     //質問一覧画面の表示
     @GetMapping("/questions")
-    public String showQuestions(@AuthenticationPrincipal User user, Model model) {
-    	//ログインユーザーの世代に関する質問を取得
-    	List<Question> questions = questionService.getFilteredQuestions(user);
+    public String showQuestions(
+            @AuthenticationPrincipal User loggedInUser,
+            @RequestParam(value = "filter", required = false) String filter,
+            Model model) {
+        // ログインユーザーの年齢を計算
+        int userAge = postService.calculateAge(postService.convertToDate(loggedInUser.getDateOfBirth()));
+
+        // ログインユーザーの世代を取得
+        String currentAgeGroup = userService.getAgeGroupFormAge(userAge);
+
+        // フィルター条件に応じて質問を取得
+        List<Question> questions;
+        if ("sameGeneration".equals(filter)) {
+            // 同世代向けの質問を取得（その世代からその世代向け）
+            questions = questionService.getQuestionsFromAndToSameGeneration(loggedInUser);
+        } else if ("toMyGeneration".equals(filter)) {
+            // ログインユーザーに向けられた質問を取得
+            questions = questionService.getQuestionsToSpecificAgeGroup(loggedInUser);
+        } else {
+            // 全ての質問を取得
+            questions = questionService.getAllQuestions();
+        }
+
+        // 各質問に投稿者の世代情報を追加
+        Map<Long, String> questionCreatedByAgeGroups = new HashMap<>();
+        for (Question question : questions) {
+            User user = question.getUser();
+            if (user != null) {
+                int age = postService.calculateAge(postService.convertToDate(user.getDateOfBirth()));
+                questionCreatedByAgeGroups.put(question.getId(), userService.getAgeGroupFormAge(age));
+            } else {
+                questionCreatedByAgeGroups.put(question.getId(), "不明");
+            }
+        }
+    	
+    	//質問とそれに関連する世代情報をテンプレートに渡す
     	model.addAttribute("questions", questions);
+    	model.addAttribute("currentAgeGroup", currentAgeGroup);
+    	model.addAttribute("questionCreatedByAgeGroups", questionCreatedByAgeGroups);
+    	
     	return "questions";
     }
     
