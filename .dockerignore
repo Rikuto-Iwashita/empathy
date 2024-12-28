@@ -1,0 +1,6 @@
+.gradle
+build
+!build/libs/*.jar
+bin
+*.iml
+*.class
