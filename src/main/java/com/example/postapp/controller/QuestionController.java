@@ -66,11 +66,12 @@ public class QuestionController {
         }
         
         //性別フィルターの適応
-        if(genderFilter != null && !genderFilter.isEmpty()) {
-        	questions = questions.stream()
-        			 .filter(q -> "指定なし".equals(genderFilter) || q.getGender().equals(genderFilter))
-        			 .collect(Collectors.toList());
+        if (genderFilter != null && !genderFilter.isBlank()) {
+            questions = questions.stream()
+                .filter(q -> "指定なし".equals(genderFilter) || genderFilter.equals(q.getGender()))
+                .collect(Collectors.toList());
         }
+
         // 各質問に投稿者の世代情報を追加
         Map<Long, String> questionCreatedByAgeGroups = new HashMap<>();
         for (Question question : questions) {
@@ -140,10 +141,22 @@ public class QuestionController {
     }
     
     @PostMapping("/questions/{id}/reply")
-    public String submitReply(@PathVariable Long id, @RequestParam String content, @AuthenticationPrincipal User user) {
+    public String submitReply(@PathVariable Long id,
+    						  @RequestParam String content,
+    						  @AuthenticationPrincipal User user,
+    						  Model model) {
+    	//質問を取得
     	Question question = questionService.getQuestionById(id);
     	if(question == null) {
     		return "redirect:/empathy/questions";
+    	}
+    	
+    	//性別制限チェック
+    	String questionGender = question.getGender();
+    	if(!"指定なし".equals(questionGender) && !questionGender.equals(user.getGender())) {
+    		model.addAttribute("error", "この質問には回答できません");
+    		model.addAttribute("question", question);
+    		return "question-detail";//詳細画面にエラーメッセージを表示
     	}
     	
     	//返信を保存

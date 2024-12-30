@@ -34,6 +34,11 @@
         </ul>
     </div>
 
+    <div th:if="${error}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+    
+
     <h3>返信する</h3>
     <form th:action="@{/empathy/questions/{id}/reply(id=${question.id})}" method="post">
         <textarea name="content" placeholder="返信内容を入力してください"></textarea>
