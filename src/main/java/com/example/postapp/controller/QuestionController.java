@@ -18,6 +18,7 @@ import com.example.postapp.model.Question;
 import com.example.postapp.model.User;
 import com.example.postapp.service.PostService;
 import com.example.postapp.service.QuestionService;
+import com.example.postapp.service.ReplyService;
 import com.example.postapp.service.UserService;
 
 @Controller
@@ -28,18 +29,22 @@ public class QuestionController {
     private final QuestionService questionService;
     private final UserService userService;
     private final PostService postService;
-
-    public QuestionController(QuestionService questionService, UserService userService, PostService postService) {
+    private final ReplyService replyService;
+    
+    public QuestionController(QuestionService questionService, UserService userService, PostService postService,
+			ReplyService replyService) {
 		this.questionService = questionService;
 		this.userService = userService;
 		this.postService = postService;
+		this.replyService = replyService;
 	}
 
-    //質問一覧画面の表示
+	//質問一覧画面の表示
     @GetMapping("/questions")
     public String showQuestions(
             @AuthenticationPrincipal User loggedInUser,
             @RequestParam(value = "filter", required = false) String filter,
+            @RequestParam(value = "genderFilter", required = false) String genderFilter,
             Model model) {
         // ログインユーザーの年齢を計算
         int userAge = postService.calculateAge(postService.convertToDate(loggedInUser.getDateOfBirth()));
@@ -59,7 +64,13 @@ public class QuestionController {
             // 全ての質問を取得
             questions = questionService.getAllQuestions();
         }
-
+        
+        //性別フィルターの適応
+        if(genderFilter != null && !genderFilter.isEmpty()) {
+        	questions = questions.stream()
+        			 .filter(q -> "指定なし".equals(genderFilter) || q.getGender().equals(genderFilter))
+        			 .collect(Collectors.toList());
+        }
         // 各質問に投稿者の世代情報を追加
         Map<Long, String> questionCreatedByAgeGroups = new HashMap<>();
         for (Question question : questions) {
@@ -84,6 +95,7 @@ public class QuestionController {
     @GetMapping("/questions/create")
     public String createQuestionForm(Model model) {
     	model.addAttribute("question", new Question());
+    	model.addAttribute("genders", List.of("男性","女性","指定なし"));
     	return "create-question";
     }
     
@@ -92,8 +104,9 @@ public class QuestionController {
     public String createQuestion(@AuthenticationPrincipal User user,
     							 @RequestParam String title,
     							 @RequestParam String content,
-    							 @RequestParam String ageGroup) {
-    	questionService.createQuestion(title, content, ageGroup, user);
+    							 @RequestParam String ageGroup,
+    							 @RequestParam String gender) {
+    	questionService.createQuestion(title, content, ageGroup, gender, user);
     	return "redirect:/empathy/questions";
     }
     
@@ -114,6 +127,28 @@ public class QuestionController {
     	model.addAttribute("question", question);
     	model.addAttribute("formattedReplies", formattedReplies);
     	return "question-detail";
+    }
+    
+    @GetMapping("/questions/{id}/reply")
+    public String showReplyForm(@PathVariable Long id, Model model) {
+    	Question question = questionService.getQuestionById(id);
+    	if(question == null) {
+    		return "redirect:/empathy/questions";
+    	}
+    	model.addAttribute("question", question);
+    	return "reply-form";
+    }
+    
+    @PostMapping("/questions/{id}/reply")
+    public String submitReply(@PathVariable Long id, @RequestParam String content, @AuthenticationPrincipal User user) {
+    	Question question = questionService.getQuestionById(id);
+    	if(question == null) {
+    		return "redirect:/empathy/questions";
+    	}
+    	
+    	//返信を保存
+    	replyService.saveReply(user, question, content);
+    	return "redirect:/empathy/questions/{id}";
     }
     
 }

@@ -24,6 +24,7 @@ public class Question {
     private String content;
     private LocalDateTime createdAt;
     private String ageGroup;
+    private String gender;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -93,6 +94,14 @@ public class Question {
 
 	public void setReplies(List<Reply> replies) {
 		this.replies = replies;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
     
 	

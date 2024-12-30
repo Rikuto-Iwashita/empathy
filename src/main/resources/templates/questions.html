@@ -12,7 +12,12 @@
         <a href="/empathy/questions?filter=sameGeneration">同世代の質問（その世代からその世代向け）</a>
         <a href="/empathy/questions?filter=toMyGeneration">自分の世代向けの質問</a>
         <a href="/empathy/questions">全ての質問</a>
+        <a href="/empathy/questions?gender=指定なし">指定なし</a>
+        <a href="/empathy/questions?gender=男性">男性</a>
+        <a href="/empathy/questions?gender=女性">女性</a>
+
     </div>
+
     <div>
         <!-- 質問一覧を表示 -->
         <ul>
@@ -26,6 +31,8 @@
                 <!-- 質問対象世代を表示 -->
                 <p>回答する世代: <span th:text="${question.ageGroup}"></span></p>
                 <p th:text="${question.createdAt}"></p>
+
+                <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細</a>
             </li>
         </ul>
     </div>

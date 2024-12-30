@@ -1,5 +1,7 @@
 package com.example.postapp.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class AuthController {
 	@GetMapping("/signup")
 	public String signupForm(Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("gender", List.of("男性", "女性"));
 		return "signup";
 	}
 	

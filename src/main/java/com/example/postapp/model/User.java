@@ -23,7 +23,8 @@ public class User implements UserDetails{
 	private String username;
 	private String password;
 	private String dateOfBirth;
-	
+	private String gender;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.emptyList();
@@ -60,5 +61,14 @@ public class User implements UserDetails{
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
 	
 }

@@ -108,11 +108,12 @@ public class QuestionService {
      * @param ageGroup 対象世代
      * @param user 質問者
      */
-    public void createQuestion(String title, String content, String ageGroup, User user) {
+    public void createQuestion(String title, String content, String ageGroup, String gender, User user) {
     	Question question = new Question();
     	question.setTitle(title);
     	question.setContent(content);
     	question.setAgeGroup(ageGroup);
+    	question.setGender(gender);
     	question.setCreatedAt(LocalDateTime.now());
     	question.setUser(user);
     	questionRepository.save(question);

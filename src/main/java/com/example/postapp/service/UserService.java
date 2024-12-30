@@ -91,4 +91,13 @@ public class UserService implements UserDetailsService{
         return "40歳以上";
     }
     
+    //性別フィルタリング
+    public List<User> filterUsersByGender(String gender) {
+    	if("指定なし".equals(gender)) {
+    		return userRepository.findAll();
+    	}
+    	return userRepository.findAll().stream()
+    			.filter(user -> gender.equals(user.getGender()))
+    			.collect(Collectors.toList());
+    }
 }

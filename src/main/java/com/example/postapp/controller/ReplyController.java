@@ -24,13 +24,25 @@ public class ReplyController {
 		this.questionService = questionService;
 	}
 	
-	//返信を投稿
-	@PostMapping("/questions/{id}/reply")
-	public String postReply(@PathVariable Long id,
-							@RequestParam String content,
-							@AuthenticationPrincipal User user) {
+	//返信を投稿する処理
+	@PostMapping("/empathy/replies/{id}/submit")
+	public String addReply(
+			@PathVariable Long id,
+			@RequestParam String content,
+			@AuthenticationPrincipal User loggedInUser) {
+		
+		//質問を取得
 		Question question = questionService.getQuestionById(id);
-		replyService.saveReply(content, question, user);
-		return "redirect:/empathy/questions/" + id;
+		
+		//返信を保存
+		try {
+			replyService.saveReply(loggedInUser, question, content);
+		} catch (IllegalArgumentException e) {
+			//返信出来ない場合
+			return "error";
+		}
+		
+		// 質問詳細ページにリダイレクト
+        return "redirect:/empathy/questions/" + id;
 	}
 }
