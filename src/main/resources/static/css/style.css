@@ -71,3 +71,13 @@ div{
     color: rgb(138, 184, 13);
     font-weight: bold;
 }
+
+a.selected {
+    background-color: #a29bfe;  /* 薄紫色 */
+    color: #ffffff;  /* 白文字 */
+}
+
+a:hover {
+    background-color: #a29bfe;
+    color: white;
+}

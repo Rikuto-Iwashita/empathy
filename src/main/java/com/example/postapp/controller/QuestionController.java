@@ -68,7 +68,7 @@ public class QuestionController {
         //性別フィルターの適応
         if (genderFilter != null && !genderFilter.isBlank()) {
             questions = questions.stream()
-                .filter(q -> "指定なし".equals(genderFilter) || genderFilter.equals(q.getGender()))
+            		.filter(q -> "指定なし".equals(genderFilter) || q.getGender().equals(genderFilter))
                 .collect(Collectors.toList());
         }
 
@@ -88,6 +88,13 @@ public class QuestionController {
     	model.addAttribute("questions", questions);
     	model.addAttribute("currentAgeGroup", currentAgeGroup);
     	model.addAttribute("questionCreatedByAgeGroups", questionCreatedByAgeGroups);
+    	model.addAttribute("currentFilter", filter);
+    	model.addAttribute("currentGenderFilter", genderFilter);
+    	
+    	
+    	//ログインユーザー情報をモデルに追加
+    	model.addAttribute("loggedInUserName", loggedInUser.getUsername());
+    	model.addAttribute("loggedInUserGender", loggedInUser.getGender());
     	
     	return "questions";
     }
@@ -153,8 +160,24 @@ public class QuestionController {
     	
     	//性別制限チェック
     	String questionGender = question.getGender();
-    	if(!"指定なし".equals(questionGender) && !questionGender.equals(user.getGender())) {
-    		model.addAttribute("error", "この質問には回答できません");
+    	boolean isGenderMismatch = !"指定なし".equals(questionGender) && !questionGender.equals(user.getGender());
+    	
+    	//世代制限チェック
+    	String questionAgeGroup = question.getAgeGroup();//質問の世代
+    	int userAge = postService.calculateAge(postService.convertToDate(user.getDateOfBirth()));//ユーザーの年齢
+    	String userAgeGroup = userService.getAgeGroupFormAge(userAge);//ユーザーの世代
+    	boolean isAgeMismatch = !questionAgeGroup.equals(userAgeGroup);
+    	
+    	//性別や世代が違う際のエラーメッセージ
+        if (isGenderMismatch && isAgeMismatch) {
+            model.addAttribute("error", "性別も世代も違う為、質問に回答できません");
+        } else if (isGenderMismatch) {
+            model.addAttribute("error", "性別が違う為、この質問には回答できません");
+        } else if (isAgeMismatch) {
+            model.addAttribute("error", "あなたの世代とは異なるため、この質問には回答できません");
+        }
+    	
+    	if(model.containsAttribute("error")) {
     		model.addAttribute("question", question);
     		return "question-detail";//詳細画面にエラーメッセージを表示
     	}
