@@ -20,12 +20,13 @@
     <div>
         <!-- 世代フィルター -->
         <a th:href="@{/empathy/questions(filter=null, genderFilter=${currentGenderFilter})}"
-           th:class="${currentFilter == null ? 'selected' : ''}">全ての質問</a>
+           th:classappend="${currentFilter == null or currentFilter == '' ? 'selected' : ''}">全ての質問</a>
         <a th:href="@{/empathy/questions(filter='sameGeneration', genderFilter=${currentGenderFilter})}"
-           th:class="${currentFilter == 'sameGeneration' ? 'selected' : ''}">同世代の質問</a>
+           th:classappend="${currentFilter == 'sameGeneration' ? 'selected' : ''}">同世代の質問</a>
         <a th:href="@{/empathy/questions(filter='toMyGeneration', genderFilter=${currentGenderFilter})}"
-           th:class="${currentFilter == 'toMyGeneration' ? 'selected' : ''}">自分の世代向けの質問</a>
+           th:classappend="${currentFilter == 'toMyGeneration' ? 'selected' : ''}">自分の世代向けの質問</a>
     </div>
+    
     <div>
         <!-- 性別フィルター -->
         <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='指定なし')}"
@@ -38,31 +39,28 @@
     
     
 
-    <div>
-        <!-- 質問一覧を表示 -->
-        <ul>
-            <li th:each="question : ${questions}">
-                <h2 th:text="${question.title}"></h2>
-                <p th:text="${question.content}"></p>
-                <!-- 質問した世代を表示 -->
-                <p>質問した世代: 
-                    <span th:text="${questionCreatedByAgeGroups[question.id]}"></span>
-                </p>
-                <!-- 質問対象世代を表示 -->
-                <p>回答する世代: <span th:text="${question.ageGroup}"></span></p>
-
-                <!-- 回答する性別を表示 -->
-                <p>回答する性別: 
-                    <span th:if="${question.gender == '指定なし'}">指定なし</span>
-                    <span th:if="${question.gender != '指定なし'}" th:text="${question.gender}"></span>
-                </p>
-
-                <p th:text="${question.createdAt}"></p>
-
-                <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細</a>
-            </li>
-        </ul>
+    <div class="question-grid">
+        <div class="question-card" th:each="question : ${questions}">
+            <h2 th:text="${question.title}"></h2>
+            <p th:text="${question.content}"></p>
+            <!-- 質問した世代を表示 -->
+            <p>質問した世代: 
+                <span th:text="${questionCreatedByAgeGroups[question.id]}"></span>
+            </p>
+            <!-- 質問対象世代を表示 -->
+            <p>回答する世代: <span th:text="${question.ageGroup}"></span></p>
+    
+            <!-- 回答する性別を表示 -->
+            <p>回答する性別: 
+                <span th:if="${question.gender == '指定なし'}">指定なし</span>
+                <span th:if="${question.gender != '指定なし'}" th:text="${question.gender}"></span>
+            </p>
+    
+            <p th:text="${question.createdAt}"></p>
+            <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細</a>
+        </div>
     </div>
+    
 
     <div th:if="${#lists.size(questions) == 0}">
         <p>質問はまだありません</p>

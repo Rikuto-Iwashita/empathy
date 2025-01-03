@@ -81,3 +81,51 @@ a:hover {
     background-color: #a29bfe;
     color: white;
 }
+
+.question-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.question-card {
+    background-color: #ffffff;
+    border: 1px solid #dfe6e9;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.question-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #4b6584;
+}
+
+.question-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #4a4a4a;
+}
+
+.question-card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #6c5ce7;
+    color: white;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.question-card a:hover {
+    background-color: #a29bfe;
+}
