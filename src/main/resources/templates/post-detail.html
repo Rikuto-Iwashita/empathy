@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>投稿詳細</title>
+</head>
+<body>
+    <h1>投稿詳細</h1>
+    <div>
+        <p th:text="${post.content}">投稿内容</p>
+        <p>投稿日: <span th:text="${post.createdAt}"></span></p>
+        <p>いいね: <span th:text="${post.likeCount}"></span></p>
+        <p>頑張って: <span th:text="${post.cheerCount}"></span></p>
+    </div>
+
+    <h2>返信</h2>
+    <form th:action="@{/empathy/{id}/reply(id=${post.id})}" method="post">
+        <textarea name="content" placeholder="返信内容を入力してください" required></textarea>
+        <button type="submit">返信する</button>
+    </form>
+
+    <h3>返信一覧</h3>
+    <ul>
+        <li th:each="reply : ${replies}">
+            <p th:text="${reply.user.username} + ':' + ${reply.content}"></p>
+            <p>投稿日: <span th:text="${reply.createdAt}"></span></p>
+        </li>
+    </ul>
+</body>
+</html>

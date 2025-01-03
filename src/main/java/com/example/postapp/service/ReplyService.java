@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.postapp.model.Post;
 import com.example.postapp.model.Question;
 import com.example.postapp.model.Reply;
 import com.example.postapp.model.User;
@@ -22,12 +23,12 @@ public class ReplyService {
 		this.userService = userService;
 	}
 
-	//特定の質問の返信一覧を取得
+	//その質問の返信一覧を取得
 	public List<Reply> getRepliesByQuestion(Question question) {
 		return replyRepository.findByQuestion(question);
 	}
 
-	//返信を保存
+	//その質問への返信を保存
 	public void saveReply(User user, Question question, String content) {
 		
 		//ログインユーザーの世代を取得
@@ -45,4 +46,19 @@ public class ReplyService {
 			throw new IllegalArgumentException("この質問には返信できません");
 		}
 	}
+	
+    // その投稿に関連する返信一覧を取得
+    public List<Reply> getRepliesByPost(Post post) {
+        return replyRepository.findByPost(post);
+    }
+    
+    // その投稿に返信を保存
+    public void saveReplyToPost(User user, Post post, String content) {
+        Reply reply = new Reply();
+        reply.setUser(user);
+        reply.setPost(post);
+        reply.setContent(content);
+        reply.setCreatedAt(LocalDateTime.now());
+        replyRepository.save(reply);
+    }
 }

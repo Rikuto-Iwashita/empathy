@@ -1,5 +1,6 @@
 package com.example.postapp.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,19 +16,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.postapp.model.Post;
+import com.example.postapp.model.Reply;
 import com.example.postapp.model.User;
 import com.example.postapp.service.PostService;
+import com.example.postapp.service.ReplyService;
 import com.example.postapp.service.UserService;
 
 @Controller
 @RequestMapping("/empathy")  // アプリ名に合わせて /empathy 以下で処理
 public class PostController {
     private final PostService postService;
+    private final ReplyService replyService;
     private final UserService userService;
     
-    public PostController(PostService postService, UserService userService) {
-		super();
+	public PostController(PostService postService, ReplyService replyService, UserService userService) {
 		this.postService = postService;
+		this.replyService = replyService;
 		this.userService = userService;
 	}
 
@@ -121,5 +125,24 @@ public class PostController {
     public String addCheer(@PathVariable Long id) {
     	postService.addCheer(id);
     	return "redirect:/empathy/home";
+    }
+    
+    // 投稿詳細画面を表示
+    @GetMapping("/{id}")
+    public String showPostDetail(@PathVariable Long id, Model model) {
+        Post post = postService.getPostById(id).orElseThrow(() -> new RuntimeException("投稿が見つかりません"));
+        List<Reply> replies = replyService.getRepliesByPost(post);
+        model.addAttribute("post", post);
+        model.addAttribute("replies", replies);
+        return "post-detail";
+    }
+
+    // 投稿に返信を追加
+    @PostMapping("/{id}/reply")
+    public String addReply(@PathVariable Long id, @RequestParam String content, Principal principal) {
+        Post post = postService.getPostById(id).orElseThrow(() -> new RuntimeException("投稿が見つかりません"));
+        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new RuntimeException("ユーザーが見つかりません"));
+        replyService.saveReplyToPost(user, post, content);
+        return "redirect:/empathy/" + id;
     }
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 
@@ -24,6 +25,10 @@ public class Reply {
 	
 	@ManyToOne
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "post_id", nullable = false)
+	private Post post;
 	
 	@PrePersist
 	protected void onCreate() {
@@ -80,6 +85,13 @@ public class Reply {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
 	
 }
