@@ -16,21 +16,24 @@
 
     <h1>タイムライン</h1>
 
-    <div>
-        <h2>世代別登録数</h2>
-        <ul>
-            <li th:class="${currentAgeGroup == '13-18歳' ? 'highlight' : ''}"
-                th:text="'13-18歳: ' + ${ageGroupCounts['13-18歳'] != null ? ageGroupCounts['13-18歳'] : 0} + '人'"></li>
-            <li th:class="${currentAgeGroup == '19-24歳' ? 'highlight' : ''}"
-                th:text="'19-24歳: ' + ${ageGroupCounts['19-24歳'] != null ? ageGroupCounts['19-24歳'] : 0} + '人'"></li>
-            <li th:class="${currentAgeGroup == '25-29歳' ? 'highlight' : ''}"
-                th:text="'25-29歳: ' + ${ageGroupCounts['25-29歳'] != null ? ageGroupCounts['25-29歳'] : 0} + '人'"></li>
-            <li th:class="${currentAgeGroup == '30-39歳' ? 'highlight' : ''}"
-                th:text="'30-39歳: ' + ${ageGroupCounts['30-39歳'] != null ? ageGroupCounts['30-39歳'] : 0} + '人'"></li>
-            <li th:class="${currentAgeGroup == '40歳以上' ? 'highlight' : ''}"
-                th:text="'40歳以上: ' + ${ageGroupCounts['40歳以上'] != null ? ageGroupCounts['40歳以上'] : 0} + '人'"></li>
-        </ul>
+    <div class="home-container">
+        <div class="age-group-counts">
+            <h2>世代別登録数</h2>
+            <ul>
+                <li th:class="${currentAgeGroup == '13-18歳' ? 'highlight' : ''}"
+                    th:text="'13-18歳: ' + ${ageGroupCounts['13-18歳'] != null ? ageGroupCounts['13-18歳'] : 0} + '人'"></li>
+                <li th:class="${currentAgeGroup == '19-24歳' ? 'highlight' : ''}"
+                    th:text="'19-24歳: ' + ${ageGroupCounts['19-24歳'] != null ? ageGroupCounts['19-24歳'] : 0} + '人'"></li>
+                <li th:class="${currentAgeGroup == '25-29歳' ? 'highlight' : ''}"
+                    th:text="'25-29歳: ' + ${ageGroupCounts['25-29歳'] != null ? ageGroupCounts['25-29歳'] : 0} + '人'"></li>
+                <li th:class="${currentAgeGroup == '30-39歳' ? 'highlight' : ''}"
+                    th:text="'30-39歳: ' + ${ageGroupCounts['30-39歳'] != null ? ageGroupCounts['30-39歳'] : 0} + '人'"></li>
+                <li th:class="${currentAgeGroup == '40歳以上' ? 'highlight' : ''}"
+                    th:text="'40歳以上: ' + ${ageGroupCounts['40歳以上'] != null ? ageGroupCounts['40歳以上'] : 0} + '人'"></li>
+            </ul>
+        </div>
     </div>
+    
     
     
     
