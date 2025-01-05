@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/signup.css"> <!-- signup専用スタイルを読み込む -->
     <title>新規登録</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/signup" method="post">
-        <label for="username">ユーザーネーム:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">パスワード:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <label for="dateOfBirth">生年月日</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
-        <br>
-
-        <label for="gender">性別:</label>
-        <select name="gender" id="gender" required>
-            <option value="男性">男性:</option>
-            <option value="女性">女性:</option>
-        </select><br>
-
-        <button type="submit">Sign Up</button>
-    </form>
-    <a href="/login">すでにアカウント持ってる方はログインへ</a>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+            <label for="username">ユーザーネーム:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="dateOfBirth">生年月日</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+            
+            <label for="gender">性別:</label>
+            <select name="gender" id="gender" required>
+                <option value="男性">男性</option>
+                <option value="女性">女性</option>
+            </select>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="footer">
+            <a href="/login">すでにアカウント持ってる方はログインへ</a>
+        </div>
+    </div>
 </body>
 </html>

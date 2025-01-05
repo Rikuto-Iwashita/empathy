@@ -1,0 +1,76 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8faff;
+}
+
+.login-container h1{
+    color: #4b6584;
+    margin-bottom: 20px;
+}
+
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.login-container label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+}
+
+.login-container input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dfe6e9;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-container button{
+    width: 100%;
+    padding: 10px;
+    background-color: #74b9ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover{
+    background-color: #0984e3;
+}
+
+.login-container .footer{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-container .footer a{
+    color: #6c5ce7;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #dfe6e9;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-container .footer a:hover{
+    background-color: #a29bfe;
+    color: white;
+}
