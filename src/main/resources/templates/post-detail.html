@@ -2,28 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>投稿詳細</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body class="post-detail-page">
     <h1>投稿詳細</h1>
-    <div>
-        <p th:text="${post.content}">投稿内容</p>
-        <p>投稿日: <span th:text="${post.createdAt}"></span></p>
-        <p>いいね: <span th:text="${post.likeCount}"></span></p>
-        <p>頑張って: <span th:text="${post.cheerCount}"></span></p>
+
+    <div class="reply-form">
+        <form th:action="@{/empathy/{id}/reply(id=${post.id})}" method="post">
+            <textarea name="content" placeholder="返信内容を入力してください" required></textarea>
+            <button type="submit">返信する</button>
+        </form>
     </div>
 
-    <h2>返信</h2>
-    <form th:action="@{/empathy/{id}/reply(id=${post.id})}" method="post">
-        <textarea name="content" placeholder="返信内容を入力してください" required></textarea>
-        <button type="submit">返信する</button>
-    </form>
+    <h3>投稿</h3>
+    <div class="post-content">
+        <p class="post-text" th:text="${post.content}">投稿内容</p>
+        <p class="post-date">投稿日: <span th:text="${post.createdAt}"></span></p>
+    </div>
 
     <h3>返信一覧</h3>
-    <ul>
-        <li th:each="reply : ${replies}">
-            <p th:text="${reply.user.username} + ':' + ${reply.content}"></p>
-            <p>投稿日: <span th:text="${reply.createdAt}"></span></p>
-        </li>
-    </ul>
+    <div class="replies">
+        <ul>
+            <li th:each="reply : ${replies}">
+                <p class="reply-text" th:text="${reply.user.username} + ':' + ${reply.content}"></p>
+            </li>
+        </ul>
+    </div>
+    <a href="/empathy/home">ホームへ戻る</a>
 </body>
 </html>
