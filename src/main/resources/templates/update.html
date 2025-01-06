@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>投稿編集</title>
 </head>
-<body>
+<body class="update-page">
     <h1>投稿編集</h1>
     <form th:action="@{/empathy/{id}/update(id=${post.id})}" method="post" th:object="${post}">
         <textarea th:field="*{content}"></textarea>

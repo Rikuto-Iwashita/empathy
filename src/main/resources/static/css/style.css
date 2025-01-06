@@ -184,6 +184,70 @@ a:hover {
     color: #4b6584;
 }
 
+/* update.html専用スタイル */
+.update-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f8faff;
+}
+
+.update-page h1{
+    margin-bottom: 20px;
+    color: #4b6584;
+}
+
+.update-page form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.update-page textarea{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #dfe6e9;
+    border-radius: 5px;
+    resize: none;
+}
+
+.update-page button{
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #74b9ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-page button:hover{
+    background-color: #0984e3;
+}
+
+.update-page a{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #6c5ce7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.update-page a:hover{
+    color: #4b6584;
+}
  
 /* 質問 */
 .question-grid {
