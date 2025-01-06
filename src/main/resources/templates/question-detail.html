@@ -6,44 +6,38 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>質問詳細</title>
 </head>
-<body>
-    <h1>質問詳細</h1>
-    <div>
-        <h1 th:text="${question.title}"></h1>
-        <p th:text="${question.content}"></p>
-    </div>
-    
-    <h2>Replies</h2>
-    <ul>
-        <li th:each="reply : ${formattedReplies}">
-            <strong th:text="${reply['user']}">Username</strong>: 
-            <span th:text="${reply['content']}">Content</span>
-        </li>
-    </ul>
-    
-    
-    
+<body class="question-detail-page">
 
-    <h3>返信一覧</h3>
-    <div>
+    <h2>返信する</h2>
+    <div class="reply-form">
+        <form th:action="@{/empathy/questions/{id}/reply(id=${question.id})}" method="post">
+            <textarea name="content" placeholder="返信内容を入力してください" required></textarea>
+            <button type="submit">返信</button>
+        </form>
+    </div>
+
+    <h2>質問</h2>
+
+    <div class="question-content">
+        <h2 class="question-title" th:text="${question.title}"></h2>
+        <p class="question-text" th:text="${question.content}"></p>
+    </div>
+
+    <h2>返信一覧</h2>
+    <div class="replies">
         <ul>
-            <li th:each="reply : ${replies}">
-                <p th:text="${reply.user.username} + ': ' + &{reply.content}"></p>
-                <p th:text="'投稿日時: ' + ${reply.createdAt}"></p>
+            <li th:each="reply : ${formattedReplies}">
+                <p class="reply-text">
+                    <strong th:text="${reply['user']}">Username</strong>: 
+                    <span th:text="${reply['content']}">Content</span>
+                </p>
             </li>
         </ul>
     </div>
 
     <div th:if="${error}">
-        <p style="color: red;" th:text="${error}"></p>
+        <p class="error-message" th:text="${error}"></p>
     </div>
-    
-
-    <h3>返信する</h3>
-    <form th:action="@{/empathy/questions/{id}/reply(id=${question.id})}" method="post">
-        <textarea name="content" placeholder="返信内容を入力してください"></textarea>
-        <button type="submit">返信を投稿</button>
-    </form>    
 
     <a href="/empathy/questions">質問一覧に戻る</a>
 </body>

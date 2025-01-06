@@ -5,22 +5,22 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="post-detail-page">
-    <h1>投稿詳細</h1>
+    <h2>返信する</h2>
 
     <div class="reply-form">
         <form th:action="@{/empathy/{id}/reply(id=${post.id})}" method="post">
             <textarea name="content" placeholder="返信内容を入力してください" required></textarea>
-            <button type="submit">返信する</button>
+            <button type="submit">返信</button>
         </form>
     </div>
 
-    <h3>投稿</h3>
+    <h2>投稿</h2>
     <div class="post-content">
         <p class="post-text" th:text="${post.content}">投稿内容</p>
         <p class="post-date">投稿日: <span th:text="${post.createdAt}"></span></p>
     </div>
 
-    <h3>返信一覧</h3>
+    <h2>返信一覧</h2>
     <div class="replies">
         <ul>
             <li th:each="reply : ${replies}">
