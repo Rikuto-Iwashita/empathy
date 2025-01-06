@@ -6,35 +6,43 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>質問一覧</title>
 </head>
-<body>
+<body class="questions-page">
+    
+<header>
+    <a href="/empathy/questions/create">質問する</a>
+    <a href="/empathy/home">ホームへ戻る</a>
+</header>
+
     <div>
         <p>ログイン中のユーザー: 
             <span th:text="${loggedInUserName}"></span> 
-            (<span th:text="${loggedInUserGender}" 
-                   th:style="'color:' + (${loggedInUserGender == '男性' ? 'blue' : 'red'})"></span>)
-        </p>
+            <span th:text="${loggedInUserGender}" 
+                   th:class="${loggedInUserGender == '男性' ? 'male-gender' : 'female-gender'}">
+            </span>
+        </p>        
     </div>
     
-
     <h1>質問一覧</h1>
-    <div>
-        <!-- 世代フィルター -->
-        <a th:href="@{/empathy/questions(filter=null, genderFilter=${currentGenderFilter})}"
-           th:classappend="${currentFilter == null or currentFilter == '' ? 'selected' : ''}">全ての質問</a>
-        <a th:href="@{/empathy/questions(filter='sameGeneration', genderFilter=${currentGenderFilter})}"
-           th:classappend="${currentFilter == 'sameGeneration' ? 'selected' : ''}">同世代の質問</a>
-        <a th:href="@{/empathy/questions(filter='toMyGeneration', genderFilter=${currentGenderFilter})}"
-           th:classappend="${currentFilter == 'toMyGeneration' ? 'selected' : ''}">自分の世代向けの質問</a>
-    </div>
+    <div class="filter-container">
+        <!-- 上段のフィルター -->
+        <div class="filter-row first-row">
+            <a th:href="@{/empathy/questions(filter=null, genderFilter=${currentGenderFilter})}"
+               th:classappend="${currentFilter == null or currentFilter == '' ? 'selected' : ''}">全ての質問</a>
+            <a th:href="@{/empathy/questions(filter='sameGeneration', genderFilter=${currentGenderFilter})}"
+               th:classappend="${currentFilter == 'sameGeneration' ? 'selected' : ''}">同世代の質問</a>
+            <a th:href="@{/empathy/questions(filter='toMyGeneration', genderFilter=${currentGenderFilter})}"
+               th:classappend="${currentFilter == 'toMyGeneration' ? 'selected' : ''}">自分の世代向けの質問</a>
+        </div>
     
-    <div>
-        <!-- 性別フィルター -->
-        <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='指定なし')}"
-           th:class="${currentGenderFilter == '指定なし' ? 'selected' : ''}">指定なし</a>
-        <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='男性')}"
-           th:class="${currentGenderFilter == '男性' ? 'selected' : ''}">男性</a>
-        <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='女性')}"
-           th:class="${currentGenderFilter == '女性' ? 'selected' : ''}">女性</a>
+        <!-- 下段のフィルター -->
+        <div class="filter-row second-row">
+            <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='指定なし')}"
+               th:class="${currentGenderFilter == '指定なし' ? 'selected' : ''}">指定なし</a>
+            <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='男性')}"
+               th:class="${currentGenderFilter == '男性' ? 'selected' : ''}">男性</a>
+            <a th:href="@{/empathy/questions(filter=${currentFilter}, genderFilter='女性')}"
+               th:class="${currentGenderFilter == '女性' ? 'selected' : ''}">女性</a>
+        </div>
     </div>
     
     
@@ -60,13 +68,9 @@
             <a th:href="@{/empathy/questions/{id}(id=${question.id})}">詳細</a>
         </div>
     </div>
-    
 
     <div th:if="${#lists.size(questions) == 0}">
         <p>質問はまだありません</p>
     </div>
 
-    <a href="/empathy/questions/create">質問する</a>
-    <a href="/empathy/home">ホームへ戻る</a>
 </body>
-</html>
