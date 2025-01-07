@@ -37,26 +37,28 @@
     
     
     
-
     <ul>
         <li th:each="post : ${posts}">
             <div>
                 <p th:text="${post.user.username} + ':' "><!--投稿者を表示--></p>
                 <p th:text="${post.content}">投稿内容</p>
-                <a th:href="@{/empathy/{id}(id=${post.id})}">詳細画面</a>
-                <form th:action="@{'/empathy/' + ${post.id} + '/like'}" method="post">
-                    <button type="submit">💗(<span th:text="${post.likeCount}">0</span>)</button>
-                </form>
-                <form th:action="@{'/empathy/' + ${post.id} + '/cheer'}" method="post">
-                    <button type="submit">🔥(<span th:text="${post.cheerCount}">0</span>)</button>
-                </form>
-                <a th:href="@{'/empathy/' + ${post.id} + '/update'}">編集</a>
-                <form th:action="@{'/empathy/' + ${post.id} + '/delete'}" method="post" style="display: inline;">
-                    <button type="submit">削除</button>
-                </form>
+                <div class="home-post-container">
+                    <a th:href="@{/empathy/{id}(id=${post.id})}">詳細画面</a>
+                    <form th:action="@{'/empathy/' + ${post.id} + '/like'}" method="post" style="display: inline;">
+                        <button type="submit">💗(<span th:text="${post.likeCount}">0</span>)</button>
+                    </form>
+                    <form th:action="@{'/empathy/' + ${post.id} + '/cheer'}" method="post" style="display: inline;">
+                        <button type="submit">🔥(<span th:text="${post.cheerCount}">0</span>)</button>
+                    </form>
+                    <a th:href="@{'/empathy/' + ${post.id} + '/update'}">編集</a>
+                    <form th:action="@{'/empathy/' + ${post.id} + '/delete'}" method="post" style="display: inline;">
+                        <button type="submit">削除</button>
+                    </form>
+                </div>
             </div>
         </li>
     </ul>
+    
     
     <!-- 投稿がない場合のメッセージ -->
     <p th:if="${#lists.isEmpty(posts)}">投稿はありません。</p>

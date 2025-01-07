@@ -129,6 +129,20 @@ a:hover {
     color: #3498db; /* ログインしている世代を目立たせる */
 }
 
+/* home.html専用のスタイル */
+.home-post-container{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.home-post-container a,
+.home-post-container form{
+    display: inline-block;
+}
+
 /* create.html専用スタイル */
 .create-page{
     display: flex;
