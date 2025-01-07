@@ -657,37 +657,31 @@ div {
 
 /* フィルター全体のコンテナ */
 .filter-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-    gap: 15px;
-}
-
-/* フィルターリンクを等間隔に配置 */
-.filter-row {
-    display: flex;
-    justify-content: space-evenly; /* 等間隔で配置 */
-    width: 100%;                    /* 幅いっぱいに広げる */
-    max-width: 800px;               /* 最大幅を設定（必要に応じて調整） */
+    display: grid;
+    grid-template-columns: repeat(3, auto); /* 3列 */
+    grid-template-rows: repeat(2, auto);   /* 2行 */
+    justify-content: center;               /* 水平方向に中央寄せ */
+    gap: 20px 40px;                        /* 行と列の間隔 */
 }
 
 /* リンクのデザイン */
-.filter-row a {
-    padding: 8px 12px;
+.filter-container a {
     text-decoration: none;
+    padding: 8px 12px;
     background-color: #dfe6e9;
     color: #6c5ce7;
     border-radius: 20px;
+    text-align: center;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.filter-row a:hover {
+.filter-container a:hover {
     background-color: #a29bfe;
     color: white;
 }
 
 /* 選択されたリンクのスタイル */
-a.selected {
+.filter-container a.selected {
     background-color: #a29bfe;
     color: white;
 }
