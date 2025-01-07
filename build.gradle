@@ -35,5 +35,5 @@ tasks.named('test') {
 }
 
 bootJar {
-    mainClassName = 'com.example.postApp.Application'
+    mainClass = 'com.example.postApp.Application'
 }
