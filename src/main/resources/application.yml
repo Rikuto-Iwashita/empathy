@@ -1,15 +1,19 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}  # HerokuのDATABASE_URLを使用
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: postgres
+    password: pass
     driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 10
-
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    h2:
+      console:
+        enabled: false
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true  # 開発中はtrue、本番環境ではfalseに
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
 
   thymeleaf:
     prefix: classpath:/templates/
