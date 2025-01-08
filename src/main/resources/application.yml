@@ -1,22 +1,23 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}  # Herokuの環境変数を使う
-    username: ${DB_USERNAME:postgres}  # Herokuのデータベースユーザー（オプション）
-    password: ${DB_PASSWORD:pass}  # Herokuのデータベースパスワード（オプション）
+    url: ${DATABASE_URL}  # HerokuのDATABASE_URLを使用
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+    show-sql: true  # 開発中はtrue、本番環境ではfalseに
 
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-    cache: false
+    cache: false  # 開発中はfalse、本番環境ではtrueに
 
   server:
     error:
       whitelabel:
-        enabled: true
+        enabled: false
     port: ${PORT:8080}
