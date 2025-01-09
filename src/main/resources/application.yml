@@ -1,27 +1,20 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
-    username: postgres
-    password: pass
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
-    dialect: org.hibernate.dialect.PostgreSQLDialect
-    h2:
-      console:
-        enabled: false
   jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
+  sql:
+    init:
+      mode: always
 
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false  # 開発中はfalse、本番環境ではtrueに
-
-  server:
-    error:
-      whitelabel:
-        enabled: false
-    port: ${PORT:8080}
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: ${PORT:8080}
