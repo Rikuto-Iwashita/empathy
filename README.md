@@ -56,49 +56,57 @@ Empathyは、今後さらに機能を拡張し、ユーザー同士がより多�
 
 新規登録画面、ログイン画面
 
-![スクリーンショット (40).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/8a2dbf47-5214-4f0e-8a9c-f4d4672ef430/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(40).png)
+![スクリーンショット (40)](https://github.com/user-attachments/assets/d06cfd19-57f5-4c03-a344-8641574c3cf8)
 
-![スクリーンショット (41).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/196a45fc-095a-4f87-b553-732261d59146/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(41).png)
+![スクリーンショット (41)](https://github.com/user-attachments/assets/369f5898-e13d-4cf7-a1f9-b6841d633c6a)
 
 ホーム画面
 
 世代別に表示される投稿が違います。現在ログインしているユーザーの世代が青くなります。（右側）
 
 - 13~18歳
-![スクリーンショット (40)](https://github.com/user-attachments/assets/7c86e3d7-149e-44f2-8d1a-7525cc25f4b4)
 
-![スクリーンショット (42).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/b2888009-ba9f-464c-9221-72f9af4cd87f/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(42).png)
+![スクリーンショット (42)](https://github.com/user-attachments/assets/b497707d-0c76-44cd-80b3-ab0b00831d61)
+
 
 - 19~24歳
 
-![スクリーンショット (43).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/8f60dd07-6cf6-48d2-8e56-071f8527a944/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(43).png)
+![スクリーンショット (43)](https://github.com/user-attachments/assets/64fae45d-7bce-4b02-9548-6ffd3e65d1fe)
+
 
 投稿作成画面
 
-![スクリーンショット (50).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/ad8cf53b-9f6c-42d6-9178-8dc259d567eb/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(50).png)
+![スクリーンショット (50)](https://github.com/user-attachments/assets/e0ace3f5-caf3-4dae-a277-b4dac4aa284b)
+
 
 投稿詳細画面
 
-![スクリーンショット (47).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/049525b3-ca6a-4402-8819-819c37de1237/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(47).png)
+![スクリーンショット (47)](https://github.com/user-attachments/assets/4a17e1b4-13cc-45a1-9bcc-d88e7d16c76a)
+
 
 質問一覧画面
 
 - 指定なし
 
-![スクリーンショット (44).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/c55e6658-7b6c-4c94-80a2-048b3da3c853/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(44).png)
+![スクリーンショット (44)](https://github.com/user-attachments/assets/fe7db900-8aa4-4393-8567-ea4ce48eb20a)
+
 
 - フィルター掛け
 
-![スクリーンショット (46).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/cd3a2b26-7e23-47e1-98dd-c74b54810615/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(46).png)
+![スクリーンショット (46)](https://github.com/user-attachments/assets/ec9c7f2d-029c-4402-86f1-a0f4cb4d8612)
+
 
 質問作成画面
 
-![スクリーンショット (45).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/429658aa-4b3a-4028-81ae-a7fd83797c67/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(45).png)
+![スクリーンショット (45)](https://github.com/user-attachments/assets/d10c630e-4854-47b4-a2ff-025240c135a7)
+
 
 質問詳細画面
 
-![スクリーンショット (48).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/208bc816-eaf2-4238-b2c1-33d0596c9d47/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(48).png)
+![スクリーンショット (48)](https://github.com/user-attachments/assets/ca251041-5601-484b-8f9c-55ad314bf238)
+
 
 - 世代や性別または両方が違う場合、条件に合うエラーメッセージが表示されます。
 
-![スクリーンショット (49).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/fbe835e6-0ef5-4a0f-81db-2477768df0ee/bf299980-22f4-448d-8b30-d711a4fdbeae/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_(49).png)
+![スクリーンショット (49)](https://github.com/user-attachments/assets/347b8cf8-364c-4f4b-a44b-594793cff6ae)
+
