@@ -31,9 +31,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+tasks.named('bootJar') {
+    archiveFileName = 'app.jar' // Heroku用に固定名にすると楽
 }
+
 
 // 修正: bootJarタスクでメインクラスを指定
 bootJar {
