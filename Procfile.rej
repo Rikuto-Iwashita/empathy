@@ -1,0 +1,5 @@
+diff a/Procfile b/Procfile	(rejected hunks)
+@@ -0 +0 @@
+-web: java -jar build/libs/empathy-app-0.0.1-SNAPSHOT.jar
+\ No newline at end of file
++web: java -Dserver.port=$PORT -jar build/libs/postApp-0.0.1-SNAPSHOT.jar
